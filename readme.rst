@@ -19,6 +19,9 @@ Table Of Modules
 juce
 ====
 
+description
+-----------
+
 The juce modules contain code for a vst-plugin.
 
 The current idea is to write a well documented, basic synth-plugin.
