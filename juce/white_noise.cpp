@@ -1,13 +1,15 @@
-#include "juce-huckleberry-osx/extras/Projucer/JuceLibraryCode/JuceHeader.h"
+// #include "juce-huckleberry-osx/extras/Projucer/JuceLibraryCode/JuceHeader.h"
 #include <stdexcept>
 #include <stdio.h>
 #include <stdlib.h>
+
+using namespace std;
 
 class WhiteNoiseComponent : public AudioAppComponent{
 
     public:
     
-        WhiteNoiseComponent(x,y,m,n){
+        WhiteNoiseComponent(int x,int y, int m, int n){
             // size of widget
             setSize(x,y);
             // channel matrix
@@ -20,8 +22,8 @@ class WhiteNoiseComponent : public AudioAppComponent{
         ~WhiteNoiseComponent(){
             this->random = NULL;
             this->volume_ctl = NULL;
-            del this->random;
-            del this->volume_ctl;
+            delete this->random;
+            delete this->volume_ctl;
             shoutdownAudio();
         }
 
@@ -32,12 +34,12 @@ class WhiteNoiseComponent : public AudioAppComponent{
              *  :param new_vol: adress of float number, e.g. numeric value of
              *                  a knobs position
              */
-            if(new_vol > 1. || new_vol < 0.){
+            if(*new_vol > 1. || *new_vol < 0.){
                 throw :: invalid_argument(
                     "received value outside of [0,1] for volume control"
                 );
             }else{
-                this.volume_ctl = new_vol;
+                this->volume_ctl = new_vol;
             }
         }
 
@@ -61,7 +63,7 @@ class WhiteNoiseComponent : public AudioAppComponent{
                      * (in [0,1]) for white noise
                      */
                     buffer[i] = (float) (
-                        (this.random.nextFloat() * 2f - 1f) * *(this->volume_ctl)
+                        (this->random.nextFloat() * 2.f - 1.f) * *(this->volume_ctl)
                     );
                 }
             }
